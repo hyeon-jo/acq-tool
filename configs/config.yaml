@@ -1,0 +1,41 @@
+data:
+  S_dir: "/data/S_images"  # placeholder
+  U_dir: "/data/U_images"  # placeholder
+  outputs_dir: "outputs"
+
+model:
+  # 로컬 경로가 우선. 비어 있으면 HF ID 사용
+  path: ""  # 예: /models/OpenGVLab/InternVL2-8B
+  hf_id: "OpenGVLab/InternVL2-8B"
+  precision: "bf16"  # bf16|fp16|fp32
+  image_size: 448
+
+inference:
+  batch_size: 8
+  num_workers: 4
+  normalize_embeddings: true
+
+preprocess:
+  sky_crop_top_pct: 0.0  # 0~1, 상단 마스킹 비활성화 기본
+
+distance:
+  metric: "cosine"  # cosine|euclidean
+
+umap:
+  n_neighbors: 30
+  min_dist: 0.1
+  metric: "cosine"
+  use_pca_first: false
+  pca_dim: 64
+
+kcenter:
+  num_select: 100
+
+viewer:
+  top_k: 8
+  metric: "cosine"
+  delta_threshold: null  # null이면 coverage.json의 δ 사용
+  point_limit: 50000
+  search_space: "U"  # U|S|Both
+  mode: "spherical"  # spherical|cartesian
+
